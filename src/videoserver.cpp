@@ -41,14 +41,14 @@ int main(int argc, char** argv) {
     } else {
         parameters.intrinsics(0, 0) = 700;
         parameters.intrinsics(1, 1) = 700;
-        parameters.intrinsics(0, 2) = video.get(CV_CAP_PROP_FRAME_WIDTH) / 2;
-        parameters.intrinsics(1, 2) = video.get(CV_CAP_PROP_FRAME_HEIGHT) / 2;
+        parameters.intrinsics(0, 2) = video.get(CAP_PROP_FRAME_WIDTH) / 2;
+        parameters.intrinsics(1, 2) = video.get(CAP_PROP_FRAME_HEIGHT) / 2;
         parameters.intrinsics(2, 2) = 1;
         parameters.distortion = (Mat_<float>(1,5) << 0, 0, 0, 0, 0);
     }
 
-    parameters.width = video.get(CV_CAP_PROP_FRAME_WIDTH);
-    parameters.height = video.get(CV_CAP_PROP_FRAME_HEIGHT);
+    parameters.width = video.get(CAP_PROP_FRAME_WIDTH);
+    parameters.height = video.get(CAP_PROP_FRAME_HEIGHT);
 
     SharedTypedPublisher<Frame> frame_publisher = make_shared<TypedPublisher<Frame> >(client, "camera", 1);
 
@@ -59,7 +59,7 @@ int main(int argc, char** argv) {
     while (true) {
         video >> image;
         if (image.empty()) {
-            video.set(CV_CAP_PROP_POS_FRAMES, 0);
+            video.set(CAP_PROP_POS_FRAMES, 0);
             continue;
         }
 
